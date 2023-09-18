@@ -44,9 +44,15 @@ class MovieServiceTest extends TestCase
             $movies
         );
 
+        $result = $this->movieService->getThreeRandomMovies();
+
         $this->assertCount(
             2,
-            $this->movieService->getThreeRandomMovies()
+            $result
+        );
+        $this->assertSame(
+            $movies,
+            $result
         );
     }
 }
