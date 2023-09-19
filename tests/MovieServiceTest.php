@@ -55,4 +55,19 @@ class MovieServiceTest extends TestCase
             $result
         );
     }
+
+    /**
+     * @dataProvider App\Tests\MovieServiceDataProvider::provideMoviesForTestsStartingWithWAndHavingEvenTitleLength()
+     */
+    public function testMoviesStartingWithWAndHavingEvenTitleLength(array $movies, array $result): void
+    {
+        $this->movieRepository->method('getAll')->willReturn(
+            $movies
+        );
+
+        $this->assertEquals(
+            $this->movieService->getMoviesStartingWithWAndHavingEvenTitleLength(),
+            $result
+        );
+    }
 }

@@ -28,4 +28,21 @@ class MovieService
 
         return $result;
     }
+
+    public function getMoviesStartingWithWAndHavingEvenTitleLength(): array
+    {
+        $result = [];
+
+        foreach ($this->movieRepository->getAll() as $movie) {
+            $lowerCaseMovieTitle = mb_strtolower($movie);
+            if (
+                str_starts_with($lowerCaseMovieTitle, 'w')
+                && mb_strlen($lowerCaseMovieTitle) % 2 === 0
+            ) {
+                $result[] = $movie;
+            }
+        }
+
+        return $result;
+    }
 }

@@ -25,4 +25,18 @@ class MovieController extends AbstractController
             $this->movieService->getThreeRandomMovies()
         );
     }
+
+    #[
+        Route(
+            '/starting-with-w-and-having-even-title-length',
+            name: 'starting-with-w-and-having-even-title-length',
+            methods: [Request::METHOD_GET]
+        )
+    ]
+    public function getMoviesStartingWithWAndHavingEvenTitleLength(): JsonResponse
+    {
+        return new JsonResponse(
+            $this->movieService->getMoviesStartingWithWAndHavingEvenTitleLength()
+        );
+    }
 }
