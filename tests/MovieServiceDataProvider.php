@@ -48,4 +48,46 @@ class MovieServiceDataProvider
             ],
         ];
     }
+
+    public function provideMoviesForTestsStartingWithWAndHavingEvenTitleLength(): Generator
+    {
+        yield [
+            'movies' => [
+                "źżćć",
+                "Wżćś",
+                "źWćć",
+                "wżźć",
+            ],
+            'result' => [
+                'Wżćś',
+                'wżźć',
+            ]
+        ];
+        yield [
+            'movies' => [
+                "WWżćć",
+                "WWźćć",
+                "Wżćś",
+                "wżźć",
+            ],
+            'result' => [
+                'Wżćś',
+                'wżźć',
+            ]
+        ];
+        yield [
+            'movies' => [
+                "żżżżż",
+                "ććććć",
+                "ąąąąą",
+                "aaaaa",
+            ],
+            'result' => []
+        ];
+
+        yield [
+            'movies' => [],
+            'result' => []
+        ];
+    }
 }
