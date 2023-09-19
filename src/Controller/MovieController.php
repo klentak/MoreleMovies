@@ -19,10 +19,10 @@ class MovieController extends AbstractController
     }
 
     #[Route('/random-three', name: 'random-three', methods: [Request::METHOD_GET])]
-    public function geThreeRandomTitles(): JsonResponse
+    public function getThreeRandomMovieTitles(): JsonResponse
     {
         return new JsonResponse(
-            $this->movieService->getThreeRandomMovies()
+            $this->movieService->getThreeRandomMovieTitles()
         );
     }
 
@@ -33,10 +33,18 @@ class MovieController extends AbstractController
             methods: [Request::METHOD_GET]
         )
     ]
-    public function getMoviesStartingWithWAndHavingEvenTitleLength(): JsonResponse
+    public function getMovieTitlesStartingWithWAndHavingEvenLength(): JsonResponse
     {
         return new JsonResponse(
-            $this->movieService->getMoviesStartingWithWAndHavingEvenTitleLength()
+            $this->movieService->getMovieTitlesStartingWithWAndHavingEvenLength()
+        );
+    }
+
+    #[Route('/containing-more-than-one-word', name: 'containing-more-than-one-word', methods: [Request::METHOD_GET])]
+    public function getMovieTitlesConsistingMoreThanOneWord(): JsonResponse
+    {
+        return new JsonResponse(
+            $this->movieService->getMovieTitlesConsistingMoreThanOneWord()
         );
     }
 }

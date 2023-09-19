@@ -31,7 +31,7 @@ class MovieServiceTest extends TestCase
 
         $this->assertCount(
             3,
-            $this->movieService->getThreeRandomMovies()
+            $this->movieService->getThreeRandomMovieTitles()
         );
     }
 
@@ -44,15 +44,15 @@ class MovieServiceTest extends TestCase
             $movies
         );
 
-        $result = $this->movieService->getThreeRandomMovies();
+        $result = $this->movieService->getThreeRandomMovieTitles();
 
         $this->assertCount(
             2,
             $result
         );
         $this->assertSame(
-            $movies,
-            $result
+            $result,
+            $movies
         );
     }
 
@@ -66,8 +66,23 @@ class MovieServiceTest extends TestCase
         );
 
         $this->assertEquals(
-            $this->movieService->getMoviesStartingWithWAndHavingEvenTitleLength(),
-            $result
+            $result,
+            $this->movieService->getMovieTitlesStartingWithWAndHavingEvenLength()
+        );
+    }
+
+    /**
+     * @dataProvider App\Tests\MovieServiceDataProvider::provideMoviesForConsistingMoreThanOneWord()
+     */
+    public function testMovieTitlesConsistingMoreThanOneWord(array $movies, array $result): void
+    {
+        $this->movieRepository->method('getAll')->willReturn(
+            $movies
+        );
+
+        $this->assertEquals(
+            $result,
+            $this->movieService->getMovieTitlesConsistingMoreThanOneWord()
         );
     }
 }
