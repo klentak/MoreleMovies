@@ -13,7 +13,7 @@ class MovieService
     ) {
     }
 
-    public function getThreeRandomMovies(): array
+    public function getThreeRandomMovieTitles(): array
     {
         $result = [];
         $movies = $this->movieRepository->getAll();
@@ -29,20 +29,25 @@ class MovieService
         return $result;
     }
 
-    public function getMoviesStartingWithWAndHavingEvenTitleLength(): array
+    public function getMovieTitlesStartingWithWAndHavingEvenLength(): array
     {
-        $result = [];
+        $result = array_filter($this->movieRepository->getAll(), function (string $value): bool {
+            $lowerCaseMovieTitle = mb_strtolower($value);
 
-        foreach ($this->movieRepository->getAll() as $movie) {
-            $lowerCaseMovieTitle = mb_strtolower($movie);
-            if (
-                str_starts_with($lowerCaseMovieTitle, 'w')
-                && mb_strlen($lowerCaseMovieTitle) % 2 === 0
-            ) {
-                $result[] = $movie;
-            }
-        }
+            return str_starts_with($lowerCaseMovieTitle, 'w') && mb_strlen($lowerCaseMovieTitle) % 2 === 0;
+        });
 
-        return $result;
+        // Can be omitted, but I like the keys to be in place :)
+        return [...$result];
+    }
+
+    public function getMovieTitlesConsistingMoreThanOneWord(): array
+    {
+        $result =  array_filter($this->movieRepository->getAll(), function (string $value): bool {
+            return count(preg_split('/\s+/u', $value, -1, PREG_SPLIT_NO_EMPTY)) > 1;
+        });
+
+        // Can be omitted, but I like the keys to be in place :)
+        return [...$result];
     }
 }
