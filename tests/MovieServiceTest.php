@@ -65,7 +65,6 @@ class MovieServiceTest extends TestCase
             $movies
         );
 
-
         $this->assertEquals(
             $this->movieService->getMoviesStartingWithWAndHavingEvenTitleLength(),
             $result
