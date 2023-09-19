@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Repository\MovieRepository;
+use RuntimeException;
 
 class MovieService
 {
@@ -19,7 +20,7 @@ class MovieService
         $movies = $this->movieRepository->getAll();
 
         if (count($movies) <= 3) {
-            return $movies;
+            throw new RuntimeException('Not enough movies!');
         }
 
         foreach (array_rand($movies, 3) as $index) {
