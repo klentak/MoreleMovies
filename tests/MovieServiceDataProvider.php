@@ -84,7 +84,6 @@ class MovieServiceDataProvider
             ],
             'result' => []
         ];
-
         yield [
             'movies' => [],
             'result' => []
