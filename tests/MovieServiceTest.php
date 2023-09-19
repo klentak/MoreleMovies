@@ -7,6 +7,7 @@ namespace App\Tests;
 use App\Repository\MovieRepository;
 use App\Service\MovieService;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 class MovieServiceTest extends TestCase
 {
@@ -44,16 +45,8 @@ class MovieServiceTest extends TestCase
             $movies
         );
 
-        $result = $this->movieService->getThreeRandomMovieTitles();
-
-        $this->assertCount(
-            2,
-            $result
-        );
-        $this->assertSame(
-            $result,
-            $movies
-        );
+        $this->expectException(RuntimeException::class);
+        $this->movieService->getThreeRandomMovieTitles();
     }
 
     /**
